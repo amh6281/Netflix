@@ -27,12 +27,12 @@ const Featured = ({ type }) => {
         </div>
       )}
       <img
-        src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+        src="https://image-cdn.hypb.st/https%3A%2F%2Fkr.hypebeast.com%2Ffiles%2F2021%2F11%2Fmarvel-spiderman-no-way-home-official-poster-image-release-tw.jpg?w=960&cbr=1&q=90&fit=max"
         alt=""
       />
       <div className="info">
         <img
-          src="https://occ-0-1432-1433.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABUZdeG1DrMstq-YKHZ-dA-cx2uQN_YbCYx7RABDk0y7F8ZK6nzgCz4bp5qJVgMizPbVpIvXrd4xMBQAuNe0xmuW2WjoeGMDn1cFO.webp?r=df1"
+          src="https://user-images.githubusercontent.com/83646986/194785533-e6b69ed7-2158-4171-a587-80af0429324c.png"
           alt=""
         />
         <span className="desc">
