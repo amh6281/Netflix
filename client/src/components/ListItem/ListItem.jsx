@@ -4,13 +4,30 @@ import {
   ThumbDownAltOutlined,
   ThumbUpAltOutlined,
 } from "@material-ui/icons";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import "./listItem.scss";
 
-const ListItem = ({ index }) => {
+const ListItem = ({ index, item }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const trailer =
-    "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
+  const [movie, setMovie] = useState({});
+
+  useEffect(() => {
+    const getMovie = async () => {
+      try {
+        const res = await axios.get("/movies/find/" + item, {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGNhMmM1MDUzYThkZWVlZGNjNmVlOSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY2NjIzNjM5NiwiZXhwIjoxNjY2NjY4Mzk2fQ.HLzbby4CUg8OBz-cQYuhcw5kkaIhnFPEKuFQykell3U",
+          },
+        });
+        setMovie(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovie();
+  }, [item]);
 
   return (
     <div
@@ -19,13 +36,10 @@ const ListItem = ({ index }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <img
-        src="https://user-images.githubusercontent.com/83646986/193170397-73ff8552-5ece-430c-aeaa-d900a69a2c78.jpg"
-        alt=""
-      />
+      <img src={movie.img} alt="" />
       {isHovered && (
         <>
-          <video src={trailer} autoPlay={true} loop />
+          <video src={movie.trailer} autoPlay={true} loop />
           <div className="itemInfo">
             <div className="icons">
               <PlayArrow className="icon" />
@@ -34,15 +48,12 @@ const ListItem = ({ index }) => {
               <ThumbDownAltOutlined className="icon" />
             </div>
             <div className="itemInfoTop">
-              <span>1시간 37분</span>
-              <span className="limit">+15</span>
-              <span>2020</span>
+              <span>{movie.duration}</span>
+              <span className="limit">+{movie.limit}</span>
+              <span>{movie.year}</span>
             </div>
-            <div className="desc">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Praesentium hic rem eveniet error possimus, neque ex doloribus.
-            </div>
-            <div className="genre">액션/SF</div>
+            <div className="desc">{movie.desc}</div>
+            <div className="genre">{movie.genre}</div>
           </div>
         </>
       )}
